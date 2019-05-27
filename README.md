@@ -8,6 +8,8 @@ Windows version: https://github.com/gigsabyte/CMPM163ASG3/blob/master/ASG3%20Mac
 
 Mac version: https://github.com/gigsabyte/CMPM163ASG3/blob/master/ASG3%20Windows.zip
 
+Part B Write-up: https://github.com/gigsabyte/CMPM163ASG3/blob/master/Homework%203B.pdf
+
 
 Experiments with particle systems, noise functions and using sound data.
 
