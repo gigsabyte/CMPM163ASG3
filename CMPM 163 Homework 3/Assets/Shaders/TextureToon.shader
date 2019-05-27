@@ -12,6 +12,8 @@ Shader "Custom/TextureToon"
 
 		_SwayAmount("Sway Amount", Float) = 0
 		_SwayDir("Sway Direction", Float) = 1
+
+		_Cube ("Cubemap", CUBE) = "" {}
     }
     
     SubShader
@@ -39,6 +41,8 @@ Shader "Custom/TextureToon"
 
 			uniform float _SwayAmount;
 			uniform float _SwayDir;
+
+			samplerCUBE _Cube; // skybox cube texture
           
             struct appdata
             {
@@ -51,6 +55,7 @@ Shader "Custom/TextureToon"
             {
 					float2 uv : TEXCOORD0;
                     float4 vertex : SV_POSITION;
+					float3 normal : TEXCOORD3;
                     float3 normalInWorldCoords : NORMAL;       
                     float3 vertexInWorldCoords : TEXCOORD1;
             };
@@ -61,6 +66,7 @@ Shader "Custom/TextureToon"
                 v2f o;
                 o.vertexInWorldCoords = mul(unity_ObjectToWorld, v.vertex); //Vertex position in WORLD coords
                 o.normalInWorldCoords = UnityObjectToWorldNormal(v.normal); //Normal in WORLD coords
+				o.normal = v.normal;
                 o.vertex = UnityObjectToClipPos(v.vertex); 
 				if(o.vertex.y < 0) {
 					float newX = o.vertex.x + (_SwayDir * o.vertex.y/4);
@@ -75,7 +81,7 @@ Shader "Custom/TextureToon"
            {
                 
                 float3 P = i.vertexInWorldCoords.xyz;
-                float3 N = normalize(i.normalInWorldCoords);
+                float3 N = normalize(i.normal);
                 float3 V = normalize(_WorldSpaceCameraPos - P);
                 float3 L = normalize(_WorldSpaceLightPos0.xyz - P);
                 float3 H = normalize(L + V);
@@ -141,9 +147,24 @@ Shader "Custom/TextureToon"
                 
                 specularVal = smoothstep(0.25, 0.25 + stepVal, specularVal);
                 float3 specular = Ks * Kl * specularVal;
+
+				float3 pLight = ambient + diffuse + specular;
+				
+				//get normalized incident ray (from camera to vertex)
+				 float3 vIncident = normalize(P - _WorldSpaceCameraPos);
+				
+				//reflect that ray around the normal using built-in HLSL command
+				float3 vReflect = reflect( vIncident, i.normal );
+             
+             
+				//use the reflect ray to sample the skybox
+				float3 reflectColor = texCUBE( _Cube, vReflect ).xyz;
+
                 
                 //FINAL COLOR OF FRAGMENT
-                return float4(ambient + diffuse + specular, 1.0);
+				//if(diffuseVal < A) 
+				return float4(lerp(reflectColor, pLight, diffuseVal + length(specular) + length(ambient)), 1.0);
+                //else return float4(pLight, 1.0);
                 
 
             }

@@ -12,7 +12,7 @@ public class Sway : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        avgs = new float[8];
+        avgs = new float[4];
         for(int i = 0; i < avgs.Length; ++i)
         {
             avgs[i] = 0.5f;

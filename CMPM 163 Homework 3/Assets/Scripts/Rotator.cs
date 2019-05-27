@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Rotator : MonoBehaviour {
 
+    Animator anim;
 	// Use this for initialization
 	void Start () {
-		
+        anim = gameObject.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -20,7 +21,7 @@ public class Rotator : MonoBehaviour {
 		// ------- animate the cube size based on spectrum data.
 
 		// consolidate spectral data to 8 partitions (1 partition for each rotating cube)
-		int numPartitions = 1;
+		int numPartitions = 8;
 		float[] aveMag = new float[numPartitions];
 		float partitionIndx = 0;
 		int numDisplayedBins = 512 / 2; //NOTE: we only display half the spectral data because the max displayable frequency is Nyquist (at half the num of bins)
@@ -48,7 +49,7 @@ public class Rotator : MonoBehaviour {
 		// Map the magnitude to the cubes based on the cube name.
 		if (gameObject.name == "deer_1") 
 		{
-			transform.localScale = new Vector3 (aveMag[0], aveMag[0], aveMag[0]);
+            anim.SetFloat("partySpeed", aveMag[0]);
 		}
 
 		// --------- End animating cube via spectral data

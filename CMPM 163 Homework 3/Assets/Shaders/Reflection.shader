@@ -34,6 +34,7 @@ Shader "Custom/Reflection" {
                 float4 vertex : SV_POSITION;
                 float3 normalInWorldCoords : NORMAL;
                 float3 vertexInWorldCoords : TEXCOORD1;
+				float3 normal : TEXCOORD2;
             };
 
             v2f vert (appdata v)
@@ -43,7 +44,7 @@ Shader "Custom/Reflection" {
 
                 o.vertexInWorldCoords = mul(unity_ObjectToWorld, v.vertex); //Vertex position in WORLD coords
                 o.normalInWorldCoords = UnityObjectToWorldNormal(v.normal); //Normal 
-                
+                o.normal = v.normal;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 
                 return o;
@@ -61,19 +62,19 @@ Shader "Custom/Reflection" {
              float3 vIncident = normalize(P - _WorldSpaceCameraPos);
              
              //reflect that ray around the normal using built-in HLSL command
-             float3 vReflect = reflect( vIncident, i.normalInWorldCoords );
+             float3 vReflect = reflect( vIncident, i.normal );
              
              
              //use the reflect ray to sample the skybox
              float4 reflectColor = texCUBE( _Cube, vReflect );
              
              //refract the incident ray through the surface using built-in HLSL command
-             float3 vRefract = refract( vIncident, i.normalInWorldCoords, 0.5 );
+             float3 vRefract = refract( vIncident, i.normal, 0.5 );
                           
              // refract RGB values by arbitrary but different amounts
-             float3 vRefractRed = refract( vIncident, i.normalInWorldCoords, 0.1 );
-             float3 vRefractGreen = refract( vIncident, i.normalInWorldCoords, 0.4 );
-             float3 vRefractBlue = refract( vIncident, i.normalInWorldCoords, 0.7 );
+             float3 vRefractRed = refract( vIncident, i.normal, 0.1 );
+             float3 vRefractGreen = refract( vIncident, i.normal, 0.4 );
+             float3 vRefractBlue = refract( vIncident, i.normal, 0.7 );
              
 			 // sample the cube at the places where the refraction rays hit
              float4 refractColorRed = texCUBE( _Cube, float3( vRefractRed ) );

@@ -63,7 +63,7 @@
 				float4 end = _EndColor;
                 
                 //Do a linear interpolation of start color and end color based on particle age percentage
-				float4 finalcol = lerp(start, end, ParticleAgePercentage) * (col.a);
+				float4 finalcol = lerp(start, end, ParticleAgePercentage/2) * (col.a);
 
                 return finalcol;
             }

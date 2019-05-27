@@ -37,6 +37,18 @@ public class AudioPeer : MonoBehaviour {
 		// this method computes the fft of the audio data, and then populates spectrumData with the spectrum data.
 		_audioSource.GetSpectrumData (spectrumData, 0, FFTWindow.Hanning);
 	}
+
+    public void toggleMusic()
+    {
+        if(_audioSource.isPlaying)
+        {
+            _audioSource.Pause();
+        }
+        else
+        {
+            _audioSource.Play();
+        }
+    }
 }
 
 

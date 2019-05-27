@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Deer
-  m_Shader: {fileID: 4800000, guid: b25b76aa61db96945bd4fc6b6cea2ede, type: 3}
+  m_Name: Tree 1
+  m_Shader: {fileID: 4800000, guid: 7bcdb8b83a79bec45b3b14392737bbac, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -24,7 +24,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Cube:
-        m_Texture: {fileID: 8900000, guid: 1a3df6643098ce8438705912492d6e0f, type: 3}
+        m_Texture: {fileID: 8900000, guid: 028362062fb38134dafa395b6478c43d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -45,7 +45,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 05cca9fdd9ce0c443ae9900a56e44245, type: 3}
-        m_Scale: {x: 4, y: 4}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -56,10 +56,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -75,19 +71,17 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Shininess: 10000
+    - _Shininess: 39.6
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StepVal: 1.7
+    - _StepVal: 0.1
     - _SwayAmount: 0
     - _SwayDir: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _AmbColor: {r: 0.2735849, g: 0.068396226, b: 0.17038669, a: 0}
-    - _AmbientColor: {r: 0.31479177, g: 0.509434, b: 0.48291594, a: 1}
-    - _Color: {r: 0.18997377, g: 0.1723033, b: 0.3018868, a: 1}
+    - _AmbColor: {r: 0.27195638, g: 0.21346566, b: 0.38679248, a: 0}
+    - _Color: {r: 0.5660378, g: 0.45554882, b: 0.39248845, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecColor: {r: 0.11320752, g: 0.08383764, b: 0.08383764, a: 1}
